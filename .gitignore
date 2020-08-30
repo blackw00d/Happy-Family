@@ -15,4 +15,4 @@ HFlk/migrations/__pycache__/
 HappyFamily/__pycache__/
 __pycache__/
 venv/
-.env.dev
+.env
