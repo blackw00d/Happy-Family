@@ -1,0 +1,78 @@
+<div class="hidden">
+    <form id="form1" name="form2" method="post" action="{% url 'AddCall' %}">
+        {% csrf_token %}
+        <div class="popuph1">ОСТАВЬТЕ ЗАЯВКУ</div>
+        <div class="h2"></div>
+        <div class="form_group">
+            <input type="text" pattern="9[0-9]{9}" class="form__input phone-mask" name="phone"
+                   required="" placeholder="Телефон 9ХХХХХХХХХ">
+        </div>
+        <input type="hidden" name="item" id="txt">
+        <div id="result_data">{{ status }}</div>
+        <button class="btn form-btn" type="submit">ОСТАВИТЬ ЗАЯВКУ</button>
+    </form>
+</div>
+
+<div class="hidden">
+    <form id="form2">
+        <div class="popuph1">Чтобы получить скидку 5% Вам необходимо:</div>
+        <div class="h2">1. Зарегистрироваться у нас на сайте (кнопка <i class="fas fa-sign-in-alt"></i><b>Личный
+            кабинет</b> внизу страницы) и заполнить анкету.
+        </div>
+        <div class="h2">2. Подписаться на наш Instagram.</div>
+        <div class="h2">3. Подписаться на нашу группу ВКонтакте.</div>
+    </form>
+</div>
+
+<div class="hidden">
+    <form id="form3">
+        <div class="popuph1">Прочие товары</div>
+        <div class="h2">Мы постоянно работаем над обновлением асортимента.<br>Скоро здесь появятся новые товары.</div>
+    </form>
+</div>
+
+<div class="hidden">
+    <div class="shopping-cart" id="form4">
+        <h1>Корзина</h1>
+
+        <form method="post" action="{% url 'Checkout' %}">
+            {% csrf_token %}
+            <div class="column-labels">
+                <label class="product-image">Изображение</label>
+                <label class="product-details">Товар</label>
+                <label class="product-price">Цена</label>
+                <label class="product-removal">Remove</label>
+            </div>
+            {% for i, n in basket.items %}
+                <div class="product">
+                    <div class="product-image">
+                        <img src="media/{{ n.img }}">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-title">{{ i }}</div>
+                    </div>
+                    <div class="product-price">{{ n.price }} &#x20BD;</div>
+                    <div class="product-removal">
+                        <a href="#" class="remove-product" data-name="{{ i }}">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="totals">
+                <div class="totals-item totals-item-total">
+                    <label>Итого</label>
+                    <div class="totals-value" id="cart-total"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="checkout">Оформить</button>
+        </form>
+
+    </div>
+</div>
+
+<a id="basketbtn" href="#form4" class="popup-with-zoom-anim" title="Корзина"><span>{{ basket_len }}</span><i
+        class="fas fa-shopping-cart"></i></a>
+<a id="upbutton" href="" onclick="smoothJumpUp(); return false;" title="Наверх"><i class="fas fa-arrow-up"></i></a>
+<a id="phonebutton" href="#form1" class="popup-with-zoom-anim" title="Обратный звонок"><i class="fas fa-phone"></i></a>

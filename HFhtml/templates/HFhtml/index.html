@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Family</title>
+    <meta name="description" content="элeктрoмoбили для дeтeй, шикарные элeктрoмoбили в Сургуте">
+	<meta name="keywords" content="дeтскиe, элeктрoмoбили, для, дeтeй, рeбeнкa. зaкaзaть, элeктромобиль, Сургут">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/scripts.min.js' %}"></script>
+    <script src="{% static 'js/basket.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/basket.css' %}">
+
+    <link rel="icon" href="{% static 'img/icons/logo.ico' %}">
+</head>
+<body>
+{% include 'HFhtml/header.html' %}
+
+<section class="main">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="main-title">
+					<h1>ШИКАРНЫЕ ЭЛЕКТРОМОБИЛИ</h1>
+					<p>У нас Вы сможете найти самый широкий выбор детских электромобилей отличного качества по самым низким ценам в городе.</p>
+				</div>
+			</div>
+			<div class="col-md-6"></div>
+		</div>
+	</div>
+</section>
+
+<section class="detmob" id="det1">
+    <div class="container">
+        <div class="row price-list">
+
+            {% for item in items %}
+                <div class="col-md-5 pr-left">
+                    <div class="fotorama" data-fit="cover" data-arrows="true" data-width="100%" data-maxheight="100%"
+                         data-autoplay="3000">
+                        {% for image in item.item_img.all %}
+                            <img src="{{ image.image.url }}">
+                        {% endfor %}
+                    </div>
+                    <div class="row header-data">
+                        <div class="col-md-8"><strong class="name-data">{{ item.name }}</strong></div>
+                        <div class="col-md-4"><span class="year-data">{{ item.age }}</span></div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-7">
+                            <strong class="har-data">Рекомендуемый вес ребенка:</strong>
+                            <p class="desc-data">
+                                до {{ item.weight }} кг
+                            </p>
+                            <strong class="har-data">Технические характеристики:</strong>
+                            <pre class="desc-data">{{ item.tech }}</pre>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <div class="cena">
+                                <span>{{ item.price }} &#x20BD;</span>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 text-center">
+                            {% if item.sale > 0 %}
+                                <div class="cena-so-skidkoi text-center">
+                                    <span>СКИДКА<br>-{{ item.sale }}%</span>
+                                </div>
+                            {% endif %}
+                            {% csrf_token %}
+                            <a href="#" class="btn buy" data-name="{{ item.name }}" data-price="{{ item.price }}">Купить</a>
+                        </div>
+                    </div>
+                </div>
+
+                {% if not forloop.counter|divisibleby:2 %}
+                    <div class="col-md-1"></div>
+                {% endif %}
+
+            {% empty %}
+                <div class="row header-data"></div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% include 'HFhtml/footer.html' %}
+{% include 'HFhtml/forms.html' %}
+</body>
+</html>

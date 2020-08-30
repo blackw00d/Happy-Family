@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Family</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/checkout.js' %}"></script>
+
+    <link rel="icon" href="{% static 'img/icons/logo.ico' %}">
+</head>
+<body>
+
+<section class="header" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="logo">
+                    <a href="/"><img src="{% static 'img/logo.png' %}" alt="Happy Family">
+                        <ul>
+                            <li>Happy Family</li>
+                            <li>Surgut</li>
+                        </ul>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if success %}
+    <div class="shopping-cart">
+        <h1>Ваш {{ order }} создан!</h1>
+        <h0>Вам на почту было отправлено письмо с инструкциями.</h0><br>
+        <h0>Для отслеживания статуса заказа, пройдите <strong>Регистрацию</strong> и войдите в <strong>Личный кабинет</strong>.</h0>
+    </div>
+{% else %}
+    <form method="post" action="{% url 'MakeOrder' %}">
+        <div class="shopping-cart">
+            {% if basket_len == 0 %}
+                <h1>Ваша корзина пуста</h1>
+                <h0>Корзина ждет, что ее наполнят. Желаем приятных покупок!</h0>
+            {% else %}
+                <h1>Ваш Заказ</h1>
+
+                {% csrf_token %}
+                <div class="column-labels">
+                    <label class="product-image">Изображение</label>
+                    <label class="product-details">Товар</label>
+                    <label class="product-price">Цена</label>
+                    <label class="product-removal">Remove</label>
+                </div>
+                {% for i, n in basket.items %}
+                    <div class="product">
+                        <div class="product-image">
+                            <img src="../media/{{ n.img }}">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title">{{ i }}</div>
+                        </div>
+                        <div class="product-price">{{ n.price }} &#x20BD;</div>
+                        <div class="product-removal">
+                            <a href="#" class="remove-product" data-name="{{ i }}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="totals">
+                    <div class="totals-item totals-item-total">
+                        <label>Итого</label>
+                        <div class="totals-value" id="cart-total"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="checkout">Оформить</button>
+
+                <div class="row-checkout">
+                    <div class="col-checkout">
+                        <span class="title">Телефон</span><br>
+                        <input type="text" pattern="9[0-9]{9}" class="phone-mask" name="phone"
+                               required placeholder="Телефон 9ХХХХХХХХХ">
+                        <br><br><span class="title">E-mail</span><br>
+                        <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="phone-mask" name="email"
+                               required>
+                    </div>
+                    <div class="col-checkout">
+                        <span class="title">Способ оплаты</span>
+                        <ul>
+                            <li>
+                                <input type="radio" id="offline" name="selector" value="offline">
+                                <label for="offline">Оплата при получении</label>
+                                <div class="check"></div>
+                            </li>
+                            <li>
+                                <input type="radio" id="online" name="selector" value="online">
+                                <label for="online">Оплата онлайн</label>
+                                <div class="check">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </form>
+{% endif %}
+
+<section class="footer" id="footer">
+    <div class="container">
+
+        <div id="fa" class="top-phone">
+            <a href="https://instagram.com/happyfamily_hmao" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://vk.com/happyfamily_hmao" title="VKontakte">
+                <i class="fab fa-vk"></i>
+            </a>
+        </div>
+        <div id="tel">
+            <div class="top-phone">
+                <a href="tel:+79226503403" title="Viber" class="a1">8 922 650-34-03</a>
+            </div>
+        </div>
+        <div id="lk">
+            <a href="/lk/" title="Войти" class="btn1 "><i class="fas fa-sign-in-alt"></i> Личный
+                кабинет</a>
+        </div>
+        <div class="copy">
+            Copyright©2019 Blackw00d ArtStudio
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

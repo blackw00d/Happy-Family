@@ -1,0 +1,325 @@
+.hidden {
+    display: none
+}
+
+#form1 {
+    background: #fff;
+    max-width: 320px;
+    margin: 40px auto;
+    position: relative;
+    text-align: center;
+    z-index: 9999;
+    padding: 40px 10px;
+    -webkit-box-shadow: 0 0 10px rgba(255, 255, 255, .67);
+    box-shadow: 0 0 10px rgba(255, 255, 255, .67)
+}
+
+#form1 input {
+    border: 1px solid #dadada;
+    color: #000
+}
+
+.h2 {
+    font-size: 15px
+}
+
+.popuph1 {
+    font-size: 20px;
+    font-weight: 500
+}
+
+.form_group input {
+    width: 100%;
+    margin: 10px 0;
+    max-width: 272px;
+    background-color: transparent;
+    border: rgba(0, 0, 0, .1) 1px solid;
+    border-bottom: rgba(0, 0, 0, .1) 2px solid;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    outline: 0;
+    display: inline-block;
+    font-weight: 300;
+    font-size: 16px;
+    padding: 11px 22px
+}
+
+.btn {
+    border: none;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: #fff;
+    background: #fa8602;
+    font-size: 20px;
+    padding: 17px 20px;
+    line-height: 65px;
+    height: auto;
+    text-shadow: 1px 1px 1px rgba(35, 31, 31, .42)
+}
+
+.btn:hover {
+    text-decoration: none;
+    background: #0567fa;
+    color: #fff
+}
+
+.form-btn {
+    background: #fa8602;
+    border: 1px solid #fa8602;
+    min-width: 220px;
+    font-size: 16px;
+    height: 63px;
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 0
+}
+
+#phonebutton {
+    background: #fa8602;
+    font-size: 30px;
+    transform: rotate(180deg);
+    border-radius: 30px;
+    border: 3px solid;
+    cursor: pointer;
+
+    position: fixed;
+    left: 0px;
+    height: 60px;
+    width: 60px;
+    bottom: calc(50% + 80px);
+}
+
+#phonebutton i {
+    transform: translate(10%, 15%)
+}
+
+#phonebutton:hover {
+    animation: shake 0.6s infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0px, 0px) rotate(0deg);
+    }
+    25% {
+        transform: translate(1px, 1px) rotate(1deg);
+    }
+    50% {
+        transform: translate(-1px, -1px) rotate(-1deg);
+    }
+    75% {
+        transform: translate(2px, -1px) rotate(2deg);
+    }
+    100% {
+        transform: translate(-1px, 1px) rotate(-1deg);
+    }
+}
+
+.mfp-bg {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1042;
+    overflow: hidden;
+    position: fixed;
+    background: #0b0b0b;
+    opacity: .8
+}
+
+.mfp-wrap {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1043;
+    position: fixed;
+    outline: 0 !important;
+    -webkit-backface-visibility: hidden
+}
+
+.mfp-container {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding: 0 8px;
+    box-sizing: border-box
+}
+
+.mfp-container:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle
+}
+
+.mfp-align-top .mfp-container:before {
+    display: none
+}
+
+.mfp-content {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 auto;
+    text-align: left;
+    z-index: 1045
+}
+
+.mfp-ajax-holder .mfp-content, .mfp-inline-holder .mfp-content {
+
+    width: 100%;
+    cursor: auto
+}
+
+.mfp-ajax-cur {
+    cursor: progress
+}
+
+.mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+    cursor: -moz-zoom-out;
+    cursor: -webkit-zoom-out;
+    cursor: zoom-out
+}
+
+.mfp-zoom {
+    cursor: pointer;
+    cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
+    cursor: zoom-in
+}
+
+.mfp-auto-cursor .mfp-content {
+    cursor: auto
+}
+
+.mfp-arrow, .mfp-close, .mfp-counter, .mfp-preloader {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none
+}
+
+.mfp-loading.mfp-figure {
+    display: none
+}
+
+.mfp-hide {
+    display: none !important
+}
+
+.mfp-preloader {
+    color: #ccc;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    text-align: center;
+    margin-top: -.8em;
+    left: 8px;
+    right: 8px;
+    z-index: 1044
+}
+
+.mfp-preloader a {
+    color: #ccc
+}
+
+.mfp-preloader a:hover {
+    color: #fff
+}
+
+.mfp-s-ready .mfp-preloader {
+    display: none
+}
+
+.mfp-s-error .mfp-content {
+    display: none
+}
+
+button.mfp-arrow, button.mfp-close {
+    overflow: visible;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    -webkit-appearance: none;
+    display: block;
+    outline: 0;
+    padding: 0;
+    z-index: 1046;
+    box-shadow: none;
+    touch-action: manipulation
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}
+
+.mfp-close {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-decoration: none;
+    text-align: center;
+    opacity: .65;
+    padding: 0 0 18px 10px;
+    color: #fff;
+    font-style: normal;
+    font-size: 28px;
+    font-family: Arial, Baskerville, monospace
+}
+
+.mfp-close:focus, .mfp-close:hover {
+    opacity: 1
+}
+
+.mfp-close:active {
+    top: 1px
+}
+
+.mfp-close-btn-in .mfp-close {
+    color: #333
+}
+
+@media screen and (max-width: 980px) {
+    #phonebutton {
+        font-size: 20px;
+        border-radius: 20px;
+        left: 15px;
+        height: 40px;
+        width: 40px;
+        bottom: calc(50% + 80px);
+    }
+
+    #phonebutton i {
+        transform: translate(0%, 5%)
+    }
+}
+
+@media (max-width: 600px) {
+    #phonebutton {
+        display: none;
+    }
+}
+
+@media (max-height: 570px) {
+    #phonebutton {
+        bottom: calc(100% + 50%);
+    }
+}
+
+@media (max-height: 425px) {
+    #phonebutton {
+        display: none;
+    }
+
+    #sidebarnav li a i {
+
+    }
+}
