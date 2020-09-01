@@ -486,9 +486,6 @@ def send_email(user, email, subject):
                      "</html>"
         subject_text = "Регистрация на сайте Happy Family"
 
-    print(email, subject, user)
-    print(message)
-
     send_mail(subject=subject_text, from_email=EMAIL_HOST_USER, recipient_list=[email],
               html_message=message, message=message)
     return True
@@ -551,7 +548,7 @@ def signup(request):
                                "aria-label=\"Close\"></button><span>Введите email и пароль</div>")
         return render(request, 'HFadmin/admin.html', {'signup_err': signup_err, 'ref': 'Referal (Option)'})
     created = Users.objects.create_user(email=email, password=password)
-    print(created)
+
     if created is not None:
         user = authenticate(request, username=email, password=password)
         if ref is not None:
