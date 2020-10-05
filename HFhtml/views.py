@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.utils.safestring import mark_safe
 from django.views.generic.base import View
 from HappyFamily.settings import EMAIL_HOST_USER
-from .models import Items, Images, Orders, OrderItem, Users
+from .models import Items, Images, Orders, OrderItem
 from .forms import CallForm
 from django.core.mail import send_mail
 

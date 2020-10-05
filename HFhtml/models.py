@@ -1,6 +1,5 @@
 from hashlib import md5
 
-from django.conf import settings
 from django.db import models
 from django.contrib import admin
 from django.utils.safestring import mark_safe
@@ -108,7 +107,9 @@ class Orders(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
-    status = models.TextField('Статус', choices=[('В работе', 'В работе'), ('Ждем оплаты', 'Ждем оплаты'), ('Оплачен', 'Оплачен'), ('Завершен', 'Завершен')], default='В работе')
+    status = models.TextField('Статус',
+                              choices=[('В работе', 'В работе'), ('Ждем оплаты', 'Ждем оплаты'), ('Оплачен', 'Оплачен'),
+                                       ('Завершен', 'Завершен')], default='В работе')
 
     class Meta:
         verbose_name = 'Заказ'

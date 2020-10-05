@@ -1,4 +1,3 @@
-from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from hashlib import md5
@@ -6,7 +5,7 @@ import requests
 import json
 from HFhtml.models import Users
 from django.utils.safestring import mark_safe
-from HFhtml.models import OrderItem, Orders
+from HFhtml.models import OrderItem
 
 
 def _vk(vk_id):
