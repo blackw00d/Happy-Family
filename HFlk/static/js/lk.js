@@ -22,7 +22,6 @@ $(document).ready(function () {
         top.style = 'display:none';
     });
     $("#panelclick").click(function (e) {
-        console.log(1);
         var top = document.getElementById('settings');
         top.className = '';
         top.style = 'display:none;position:absolute;top:70px;height:70%;';

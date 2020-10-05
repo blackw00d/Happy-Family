@@ -45,7 +45,6 @@ class UsersManager(BaseUserManager):
 
 
 class Users(AbstractBaseUser, PermissionsMixin):
-    # user = models.TextField('Пользователь', default=None)
     password = models.TextField('Пароль')
     email = models.EmailField('Почта', unique=True)
     phone = models.TextField('Телефон', default=None, null=True, max_length=10)
@@ -79,7 +78,6 @@ class Items(models.Model):
 
     def image(self):
         img = self.item_img.all()
-        print(len(img))
         if len(img) == 0:
             return '-'
         else:
@@ -134,7 +132,6 @@ class OrderItem(models.Model):
 
     def image(self):
         img = self.item.item_img.all()
-        print(len(img))
         if len(img) == 0:
             return '-'
         else:
