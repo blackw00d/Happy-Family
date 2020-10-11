@@ -1,54 +1,52 @@
 const fadeTime = 300;
 
 $(document).ready(function () {
-    recalculateCart();
+    recalculateTotalCart();
 
-    $("#sidebarnav li").click(function (e) {
-        var top = document.getElementsByClassName('active');
-        for (var i in top) {
-            top[i].className = '';
-        }
+    $("#sidebarnav li").click(function () {
+        const top = document.getElementsByClassName('active');
+        top.className = '';
         this.className = 'active';
     });
-    $("#settingsclick").click(function (e) {
-        var top = document.getElementById('controlpanel');
+    $("#settingsclick").click(function () {
+        let top = document.getElementById('controlpanel');
         top.className = '';
         top.style = 'display:none;'
-        var top = document.getElementById('settings');
+        top = document.getElementById('settings');
         top.className = 'page-wrapper';
         top.style = 'visibility: visible;position:absolute;top:70px;height:calc(100% - 70px);width:85%';
-        var top = document.getElementById('orders');
+        top = document.getElementById('orders');
         top.className = '';
         top.style = 'display:none';
     });
-    $("#panelclick").click(function (e) {
-        var top = document.getElementById('settings');
+    $("#panelclick").click(function () {
+        let top = document.getElementById('settings');
         top.className = '';
         top.style = 'display:none;position:absolute;top:70px;height:70%;';
-        var top = document.getElementById('controlpanel');
+        top = document.getElementById('controlpanel');
         top.className = 'page-wrapper';
         top.style = 'visibility: visible;';
-        var top = document.getElementById('orders');
+        top = document.getElementById('orders');
         top.className = '';
         top.style = 'display:none;';
     });
-    $("#ordersclick").click(function (e) {
-        var top = document.getElementById('settings');
+    $("#ordersclick").click(function () {
+        let top = document.getElementById('settings');
         top.className = '';
         top.style = 'display:none;position:absolute;top:70px;height:70%;';
-        var top = document.getElementById('controlpanel');
+        top = document.getElementById('controlpanel');
         top.className = '';
         top.style = 'display:none;position:absolute;top:70px;height:70%;';
-        var top = document.getElementById('orders');
+        top = document.getElementById('orders');
         top.className = 'page-wrapper';
         top.style = 'visibility: visible;position:absolute;top:70px;height:calc(100% - 70px);width:85%';
     });
 });
 
-function recalculateCart() {
-
+/* Displaying the total amount for each item */
+function recalculateTotalCart() {
     $('.shopping-cart').each(function () {
-        var total = 0;
+        let total = 0;
         $(this).find('.product').each(function () {
             total += parseFloat($(this).children('.product-price').text());
         });

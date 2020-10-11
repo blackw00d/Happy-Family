@@ -46,7 +46,6 @@
                                 {{ reset_err }}
                             {% endif %}
                         {% endblock %}
-                        <input type="hidden" name="signin" value="1">
                         <div class="form-group m-form__group">
                             <input class="form-control m-input" type="email" autocomplete="off" name="email" value=""
                                    placeHolder="Email адрес" required autofocus>
@@ -86,14 +85,6 @@
                                 {{ signup_err }}
                             {% endif %}
                         {% endblock %}
-                        <input type="hidden" name="signup" value="1">
-                        <input type="hidden" id="signup_error" value="0">
-                        {#                        <div class="form-group m-form__group">#}
-                        {#                            <input class="form-control m-input" type="text" id="signup_name" name="name" value=""#}
-                        {#                                   placeHolder="User Name" required autofocus>#}
-                        {#                            <div id="signup_name_error"#}
-                        {#                                 style="color:#f4516c;font-weight:400;font-size:.85rem;padding-left:1.6rem;display: none"></div>#}
-                        {#                        </div>#}
                         <div class="clearfix">
                         </div>
                         <div class="form-group m-form__group">
@@ -153,7 +144,6 @@
                     </div>
                     <form class="m-login__form m-form" method="post" action="{% url 'Reset' %}">
                         {% csrf_token %}
-                        <input type="hidden" name="forget" value="1">
                         <div class="form-group m-form__group">
                             <input class="form-control m-input" type="email" placeholder="Email адрес" name="email"
                                    value="" required autocomplete="off" autofocus>
@@ -186,7 +176,7 @@
                                 {{ new_err }}
                             {% endif %}
                         {% endblock %}
-                        <input type="hidden" name="new_pass" value="1">
+                        <input type="hidden" name="forget" value="{% if new %}{{ new }}{% endif %}">
                         <div class="form-group m-form__group">
                             <input class="form-control m-input" type="email" name="email" value=""
                                    placeholder="Email адрес" required="" autofocus="" autocomplete="off">
