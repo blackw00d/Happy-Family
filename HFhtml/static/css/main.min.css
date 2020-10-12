@@ -4456,10 +4456,6 @@ b, strong {
     text-decoration: none;
     list-style: none;
     position: absolute;
-    top: 50%;
-    left: 20%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
 }
 
 .nav ul li {
@@ -4471,7 +4467,7 @@ b, strong {
     font-weight: 600;
     font-size: 17px;
     display: inline-block;
-    line-height: 50px;
+    line-height: 120px;
     margin: 0 15px;
     color: #0567fa;
     text-decoration: none;
