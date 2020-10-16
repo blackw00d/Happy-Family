@@ -4,8 +4,7 @@ $(document).ready(function () {
     recalculateTotalCart();
 
     $("#sidebarnav li").click(function () {
-        const top = document.getElementsByClassName('active');
-        top.className = '';
+        $('.active').removeClass();
         this.className = 'active';
     });
     $("#settingsclick").click(function () {
@@ -39,7 +38,7 @@ $(document).ready(function () {
         top.style = 'display:none;position:absolute;top:70px;height:70%;';
         top = document.getElementById('orders');
         top.className = 'page-wrapper';
-        top.style = 'visibility: visible;position:absolute;top:70px;height:calc(100% - 70px);width:85%';
+        top.style = 'visibility: visible;position:absolute;top:70px;width:85%;';
     });
 });
 

@@ -92,12 +92,12 @@
     <div id="controlpanel" class="page-wrapper">
         <div class="container-fluid">
             <div class="row page-titles">
-                <div class="col-md-4 col-xs-12 align-self-center">
+                <div class="col-md-12 align-self-center">
                     <h3 class="text-themecolor m-b-0 m-t-0">Контрольная панель</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12" style="max-width: 50%;">
+                <div class="col-6 col-md-7">
                     <div class="card">
                         <div class="card-body">
                             <div>Ваша <span style="color: #0069d9;">
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12" style="max-width: 50%;">
+                 <div class="col-6 col-md-7">
                     <div class="card">
                         <div class="card-body">
                             <div>Вы пригласили <span style="color: #0069d9;">{{ ref }}</span> человек (а)
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-xl-3">
+                <div class="col-3 col-md-7">
                     <div class="card">
                         <div class="dashcard card-body">
                             <div class="d-flex no-block">
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-xl-3">
+                <div class="col-3 col-md-7">
                     <div class="card">
                         <div class="dashcard card-body">
                             <div class="d-flex no-block">
@@ -141,7 +141,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-6 col-md-7">
                     <div class="card">
                         <div class="card-body">
                             <h6 class="dashcard-text-title text-muted">Ваша скидка</h6>
@@ -216,7 +216,7 @@
                                                 <h6 class="dashcard-text-title text-muted">
                                                     ВКонтакте ID
                                                 </h6>
-                                                <input type="text" maxlength="42" size="42" name="vk"
+                                                <input type="text" maxlength="42" name="vk"
                                                        value="{{ vk }}" title="Введите ВКонтакте ID в числовом формате"
                                                        required pattern="^(?=.*?[0-9]).{1,}$">
                                             </td>
@@ -243,7 +243,7 @@
                                             <td>
                                                 <h6 class="dashcard-text-title text-muted">Instagram </h6>
                                                 {% csrf_token %}
-                                                <input type="text" maxlength="42" size="42" name="inst"
+                                                <input type="text" maxlength="42" name="inst"
                                                        value="{{ instagram }}" title="Спецсимволы не допустимы"
                                                        required pattern="^[a-z0-9_-]{3,30}$">
                                             </td>

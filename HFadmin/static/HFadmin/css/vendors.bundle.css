@@ -14809,34 +14809,6 @@ button.toast-close-button {
     clip: auto
 }
 
-/*!* Line Awesome 1.1.0 by @icons_8 - https://icons8.com/line-awesome
-* License - https://icons8.com/good-boy-license/ (Font: SIL OFL 1.1, CSS: MIT License)
-*
-* Made with love by Icons8 [ https://icons8.com/ ] using FontCustom [ https://github.com/FontCustom/fontcustom ]
-*
-* Contacts:
-* [ https://icons8.com/contact ]
-*
-* Follow Icon8 on
-* Twitter [ https://twitter.com/icons_8 ]
-* Facebook [ https://www.facebook.com/Icons8 ]
-* Google+ [ https://plus.google.com/+Icons8 ]
-* GitHub [ https://github.com/icons8 ]*/
-@font-face {
-    font-family: LineAwesome;
-    src: url(fonts/line-awesome/line-awesome.eot?v=1.1.);
-    src: url(fonts/line-awesome/line-awesome.eot??v=1.1.#iefix) format("embedded-opentype"), url(fonts/line-awesome/line-awesome.woff2?v=1.1.) format("woff2"), url(fonts/line-awesome/line-awesome.woff?v=1.1.) format("woff"), url(fonts/line-awesome/line-awesome.ttf?v=1.1.) format("truetype"), url(fonts/line-awesome/line-awesome.svg?v=1.1.#fa) format("svg");
-    font-weight: 400;
-    font-style: normal
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-    @font-face {
-        font-family: LineAwesome;
-        src: url(fonts/line-awesome/line-awesome.svg?v=1.1.#fa) format("svg")
-    }
-}
-
 .la {
     display: inline-block;
     font: normal normal normal 16px/1 LineAwesome;

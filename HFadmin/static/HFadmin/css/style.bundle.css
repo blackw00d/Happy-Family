@@ -1788,7 +1788,8 @@ select.form-control:focus::-ms-value {
     font-size: 1rem;
     line-height: 1.25;
     border-radius: .25rem;
-    transition: all .15s ease-in-out
+    transition: all .15s ease-in-out;
+    margin-right: 10px;
 }
 
 .btn:focus, .btn:hover {
@@ -31715,13 +31716,8 @@ select.m-select2 {
 }
 
 @media (max-width: 768px) {
-    .m-login.m-login--2 .m-login__wrapper .m-login__container {
-        width: 100%;
-        margin: 0 auto
-    }
-
     .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form {
-        width: 100%;
+        width: 60%;
         margin: 0 auto
     }
 
@@ -31763,7 +31759,6 @@ select.m-select2 {
 
 @media (max-width: 768px) {
     .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-sub {
-        padding-left: 0;
         padding-right: 0
     }
 }
@@ -38315,4 +38310,29 @@ and (min-width: 993px) {
 
 .m-login__logo a {
     color: #0069d9;
+}
+
+@media (max-width: 568px) {
+    .m-login.m-login--2.m-login--singin .m-login__signin {
+        max-width: 80%;
+    }
+    .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__account {
+        max-width: 75%;
+    }
+    .m-login.m-login--2.m-login--forget-password .m-login__forget-password {
+        max-width: 80%;
+    }
+    .m-login.m-login--2.m-login--signup .m-login__signup {
+        max-width: 80%;
+    }
+    .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__logo {
+        max-width: 80%;
+        margin: 0
+    }
+}
+
+@media (max-width: 768px) {
+    .m--align-right {
+        text-align: center
+    }
 }

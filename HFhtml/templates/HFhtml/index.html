@@ -41,7 +41,7 @@
         <div class="row price-list">
 
             {% for item in items %}
-                <div class="col-md-5 pr-left">
+                <div class="col-8 col-lg-5 col-md-9 col-sm-8 pr-left">
                     <div class="fotorama" data-fit="cover" data-arrows="true" data-width="100%" data-maxheight="100%"
                          data-autoplay="3000">
                         {% for image in item.item_img.all %}
@@ -83,7 +83,7 @@
                 </div>
 
                 {% if not forloop.counter|divisibleby:2 %}
-                    <div class="col-md-1"></div>
+                    <div class="col-md-auto"></div>
                 {% endif %}
 
             {% empty %}

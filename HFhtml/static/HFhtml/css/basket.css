@@ -164,54 +164,16 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
     color: #fff
 }
 
-/* Make adjustments for tablet */
-@media screen and (max-width: 650px) {
-    .shopping-cart {
-        margin: 0;
-        padding-top: 20px;
-        border-top: 1px solid #eee;
-    }
-
-    .column-labels {
-        display: none;
-    }
-
-    .product-image {
-        float: right;
-        width: auto;
-    }
-
-    .product-image img {
-        margin: 0 0 10px 10px;
-    }
-
+@media (max-width: 1000px) {
     .product-details {
-        float: none;
-        margin-bottom: 10px;
-        width: auto;
+        float: left;
+        width: 47%;
     }
-
     .product-price {
-        clear: both;
-        width: 70px;
+        float: left;
+        width: 22%;
     }
-
-    .product-removal {
-        width: auto;
-    }
-}
-
-/* Make more adjustments for phone */
-@media screen and (max-width: 350px) {
-    .product-removal {
-        float: right;
-    }
-
-    .totals .totals-item label {
-        width: 60%;
-    }
-
-    .totals .totals-item .totals-value {
-        width: 40%;
+    .product .remove-product {
+        font-size: 15px
     }
 }

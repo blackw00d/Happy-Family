@@ -259,74 +259,58 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
     color: #fa8602;
 }
 
-@media (max-width: 1024px) {
-    .product-details {
-        float: left;
-        width: 47%;
-    }
-    .product-price {
-        float: left;
-        width: 22%;
-    }
-    .title {
-        font-size: 15px
-    }
-    .phone-mask {
-        font-size: 0.8rem
-    }
-    .col-checkout ul li label {
-        font-size: 15px
+
+@media (max-width: 1600px) {
+    .shopping-cart {
+        max-width: 70%;
     }
 }
 
-@media (max-width: 768px) {
-    .product-details {
-        float: left;
-        width: 47%;
+@media (max-width: 1200px) {
+    .shopping-cart {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .card-title, .column-labels, .product, .totals {
+        font-size: 12px
+    }
+    .shopping-cart {
+        padding: 20px 30px
+    }
+    .card-title {
+        margin-bottom: .3em
+    }
+    .column-labels label {
+        margin-bottom: 5px
+    }
+    .product {
+        margin-bottom: 5px;
     }
     .product .product-image img {
         width: 70px;
     }
-    .product-price {
+}
+
+@media (max-width: 700px) {
+    .product-image {
+        width: 40%
+    }
+    .product-details {
         float: left;
-        width: 22%;
-        font-size: 14px
+        width: 37%;
     }
-    .product-title {
-        font-size: 14px
+    .totals .totals-item label {
+        width: 69%;
     }
-    .product .remove-product {
-        font-size: 12px
-    }
-    .title {
-        font-size: 14px
-    }
-    .phone-mask {
-        font-size: 0.7rem;
-        padding: .6rem 0.5rem
-    }
-    .col-checkout ul li label {
-        font-size: 14px
+    .totals .totals-item .totals-value {
+        width: 31%;
     }
 }
 
-@media (max-width: 620px) {
-    .product-details {
-        float: left;
-        width: 47%;
-    }
-    .product-price {
-        float: left;
-        width: 22%;
-    }
-    .title {
-        font-size: 12px
-    }
-    .phone-mask {
-        font-size: 0.5rem;
-        padding: .6rem 0.9rem
-    }
-    .col-checkout ul li label {
-        font-size: 12px
+@media (max-width: 576px){
+    .product .product-image img {
+        width: 50px;
     }
 }

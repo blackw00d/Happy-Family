@@ -18,3 +18,4 @@ venv/
 .env
 .env.prod
 /media/items/img/
+.gitignore
