@@ -88,7 +88,8 @@ def index(request):
         request.session['city'] = 'Сургут'
 
     itemlist = get_all_items(request.session['city'])
-    context = {'items': itemlist, 'city': request.session['city']}
+    cities = get_all_cities()
+    context = {'items': itemlist, 'cities': cities, 'city': request.session['city']}
     context.update(get_basket_with_len(request.session['basket']))
 
     return render(request, 'HFhtml/index.html', context)

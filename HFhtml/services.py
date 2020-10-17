@@ -1,6 +1,6 @@
 from django.utils.safestring import mark_safe
 from HappyFamily.settings import EMAIL_HOST_USER
-from .models import Items, Images, Orders, OrderItem, CityPrice
+from .models import Items, Images, Orders, OrderItem, CityPrice, City
 from django.core.mail import send_mail
 from django.db.models import F
 
@@ -289,6 +289,11 @@ def send_email(email, created, pay_method):
 def get_all_items(city):
     """ Получение списка товаров """
     return CityPrice.objects.filter(city__name=city, count__gt=0).order_by('id')
+
+
+def get_all_cities():
+    """ Получение списка городов """
+    return City.objects.all().order_by('id')
 
 
 def get_item_image(item_name):

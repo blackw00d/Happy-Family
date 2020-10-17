@@ -39,14 +39,16 @@
                     <div class="am-tooltip-content">
                         <div style="text-align: center; margin-bottom: 15px;">Выберите город:</div>
                         <select class="js-region">
-                            <option value="Сургут">Сургут</option>
-                            <option value="Тюмень">Тюмень</option>
+                            {% for city in cities %}
+                                <option value="{{ city }}">{{ city }}</option>
+                            {% endfor %}
                         </select>
                         <form method="post" action="{% url 'ChangeCity' %}">
                             {% csrf_token %}
                             <input type="hidden" name="city" id="city" value="{{ city }}">
                             <button type="submit" class="button" style="">
-                                Да, это мой город</button>
+                                Да, это мой город
+                            </button>
                         </form>
                     </div>
                 </div>
