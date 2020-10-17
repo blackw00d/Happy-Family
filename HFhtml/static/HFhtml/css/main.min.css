@@ -4407,6 +4407,79 @@ b, strong {
     font-weight: 700
 }
 
+.drop-down{
+    margin: auto;
+}
+
+.drop-down a.drop-down-header {
+    border-bottom-style: dotted;
+    margin-right: 23px;
+    border-bottom: 1px solid #a8c7e7;
+    color: #007bff;
+    text-shadow: black 0.5px 0.5px 1px, black -0.5px -0.5px 1px, black 0.5px -0.5px 1px, black -0.5px 0.5px 1px;
+}
+
+.drop-down a.drop-down-header:hover {
+    color: #fa8602;
+}
+
+div.am-tooltip {
+    background-color: #175fb9;
+    box-shadow: #b6c4e1 0 0 5px 0;
+    border-radius: 4px;
+    padding: 15px 20px;
+    right: 30px;
+    top: 75px;
+    position: absolute;
+    color: #ffffff;
+    z-index: 100;
+    display: none;
+}
+
+div.am-tooltip .am-tooltip-content .js-region {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+div.am-tooltip .am-tooltip-content .button {
+    border-radius: 4px;
+    background: #fa8602;
+    border: 1px solid #fa8602;
+    color: #ffffff;
+    font-size: 18px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+    height: 38px;
+    line-height: 35px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+div.am-tooltip .am-tooltip-content .button:hover{
+    color: #175fb9;
+}
+
+div.am-tooltip-bottom:after {
+    border-color: rgba(23, 95, 185, 0) rgba(23, 95, 185, 0) #175fb9 rgba(23, 95, 185, 0);
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+}
+
+div.am-tooltip:after {
+    border: 10px solid;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-color: rgba(23, 95, 185, 0) rgba(23, 95, 185, 0) #175fb9 rgba(23, 95, 185, 0);
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+}
+
 .btn {
     border: none;
     -webkit-border-radius: 30px;
@@ -4431,6 +4504,7 @@ b, strong {
     position: absolute;
     top: 10px;
     right: 10px;
+    display: flex;
 }
 
 .btn1 {
@@ -5080,6 +5154,22 @@ body {
     .btn {
         font-size: 15px;
     }
+
+    div.am-tooltip {
+        font-size: 14px;
+        width: 200px;
+        right: 35px;
+        top: 65px;
+    }
+
+    div.am-tooltip .am-tooltip-content .button {
+        font-size: 13px;
+        width: 100%;
+    }
+
+    .drop-down-header {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -5241,6 +5331,29 @@ body {
     #basketbtn i {
         transform: translate(20%, 15%)
     }
+
+    .drop-down {
+        margin: 0px;
+    }
+
+    .drop-down a.drop-down-header {
+        font-size: 10px;
+        margin-right: 10px;
+    }
+
+    div.am-tooltip {
+        font-size: 10px;
+        width: 170px;
+        right: 25px;
+        top: 35px;
+    }
+
+    div.am-tooltip .am-tooltip-content .button {
+        font-size: 10px;
+        height: 20px;
+        line-height: 17px;
+        margin-bottom: 0px;
+    }
 }
 
 @media (max-width: 570px) {
@@ -5369,5 +5482,9 @@ body {
 
     #phonebutton i {
         transform: translate(35%, 5%)
+    }
+
+    div.am-tooltip {
+        right: 5px;
     }
 }

@@ -42,19 +42,22 @@ def make_order(request):
     """ Создание заказа """
     if 'basket' not in request.session:
         return redirect('../')
+    if 'city' not in request.session:
+        return redirect('../')
 
     basket = request.session['basket']
     phone = request.POST.get('phone', None)
     email = request.POST.get('email', None)
     pay = request.POST.get('selector', None)
+    city = request.session['city']
     if not phone or not email or not pay or basket == {}:
         return redirect('../')
 
-    created = create_order(phone, email, pay)
+    created = create_order(phone, email, pay, city)
     if created and email:
         send_email(email, created, pay)
 
-    add_items_to_order(basket, created)
+    add_items_to_order(basket, created, city)
     request.session.modified = True
 
     return render(request, 'HFhtml/checkout.html', {'success': True, 'order': created})
@@ -68,13 +71,24 @@ def checkout(request):
     return render(request, 'HFhtml/checkout.html', get_basket_with_len(request.session['basket']))
 
 
+def change_city(request):
+    """ Смена города """
+    city = request.POST.get('city', 'Сургут')
+    request.session['city'] = city
+    request.session['basket'] = {}
+
+    return redirect('/')
+
+
 def index(request):
     """ Главная страница сайта """
     if 'basket' not in request.session:
         request.session['basket'] = {}
+    if 'city' not in request.session:
+        request.session['city'] = 'Сургут'
 
-    itemlist = get_all_items()
-    context = {'items': itemlist}
+    itemlist = get_all_items(request.session['city'])
+    context = {'items': itemlist, 'city': request.session['city']}
     context.update(get_basket_with_len(request.session['basket']))
 
     return render(request, 'HFhtml/index.html', context)

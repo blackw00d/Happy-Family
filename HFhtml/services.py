@@ -1,7 +1,8 @@
 from django.utils.safestring import mark_safe
 from HappyFamily.settings import EMAIL_HOST_USER
-from .models import Items, Images, Orders, OrderItem
+from .models import Items, Images, Orders, OrderItem, CityPrice
 from django.core.mail import send_mail
+from django.db.models import F
 
 
 def send_email(email, created, pay_method):
@@ -285,9 +286,9 @@ def send_email(email, created, pay_method):
     return True
 
 
-def get_all_items():
+def get_all_items(city):
     """ Получение списка товаров """
-    return Items.objects.all().order_by('id')
+    return CityPrice.objects.filter(city__name=city, count__gt=0).order_by('id')
 
 
 def get_item_image(item_name):
@@ -320,14 +321,15 @@ def get_basket_with_len(basket):
     return {'basket': basket, 'basket_len': basket_len}
 
 
-def create_order(phone, email, pay):
+def create_order(phone, email, pay, city):
     """ Внесение заказа в базу данных """
-    return Orders.objects.create(phone=phone, email=email, pay=pay)
+    return Orders.objects.create(phone=phone, email=email, pay=pay, city=city)
 
 
-def add_items_to_order(basket, created):
-    """ Внесение товаров в заказ """
+def add_items_to_order(basket, created, city):
+    """ Внесение товаров в заказ и изменение количесва товаров на складе города покупки"""
     for item in basket:
-        item_name = Items.objects.get(name=item)
-        OrderItem.objects.create(order=created, item=item_name)
+        item_name = CityPrice.objects.get(item__name=item)
+        OrderItem.objects.create(order=created, items=item_name)
+        CityPrice.objects.filter(city__name=city, item__name=item).values('count').update(count=F('count') - 1)
     basket.clear()

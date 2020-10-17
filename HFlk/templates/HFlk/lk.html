@@ -308,22 +308,22 @@
                                         </div>
                                         <div class="product">
                                             <div class="product-image">
-                                                <img src="{{ order.item.image }}">
+                                                <img src="{{ order.items.item.image }}">
                                             </div>
                                             <div class="product-details">
-                                                <div class="product-title">{{ order.item.name }}</div>
+                                                <div class="product-title">{{ order.items.item.name }}</div>
                                             </div>
-                                            <div class="product-price" style="width: 23%">{{ order.item.price }}</div>
+                                            <div class="product-price" style="width: 23%">{{ order.items.price }}</div>
                                         </div>
                                     {% else %}
                                         <div class="product">
                                             <div class="product-image">
-                                                <img src="{{ order.item.image }}">
+                                                <img src="{{ order.items.item.image }}">
                                             </div>
                                             <div class="product-details">
-                                                <div class="product-title">{{ order.item.name }}</div>
+                                                <div class="product-title">{{ order.items.item.name }}</div>
                                             </div>
-                                            <div class="product-price" style="width: 23%">{{ order.item.price }}</div>
+                                            <div class="product-price" style="width: 23%">{{ order.items.price }}</div>
                                         </div>
                                     {% endifchanged %}
                                 {% endfor %}
@@ -340,8 +340,9 @@
                                 {% else %}
                                     <div class="card-title">
                                     {% if phone == '' %}
-                                        У Вас не указан номер телефона.<br>Для отслеживания заказов введите номер
-                                        телефона в разделе <strong>Настройки</strong>
+                                        У Вас не указан номер телефона.<br>
+                                        Для отслеживания заказов введите номер телефона в разделе<br>
+                                        Настройки
                                     {% else %}
                                         У Вас нет заказов
                                     {% endif %}

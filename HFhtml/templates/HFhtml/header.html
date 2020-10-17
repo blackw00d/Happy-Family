@@ -27,9 +27,29 @@
                     </ul>
                 </div>
             </div>
-            <div class="btns">
-                <a href="#form2" class="btn1 popup-with-zoom-anim">Получить скидку</a><br>
-                <a href="#form1" class="btn1 popup-with-zoom-anim">Заказать звонок</a>
+            <div class=" btns">
+                <div class="drop-down">
+                    <a class="drop-down-header">{{ city }}</a>
+                </div>
+                <div>
+                    <a href="#form2" class="btn1 popup-with-zoom-anim">Получить скидку</a><br>
+                    <a href="#form1" class="btn1 popup-with-zoom-anim">Заказать звонок</a>
+                </div>
+                <div class="am-tooltip">
+                    <div class="am-tooltip-content">
+                        <div style="text-align: center; margin-bottom: 15px;">Выберите город:</div>
+                        <select class="js-region">
+                            <option value="Сургут">Сургут</option>
+                            <option value="Тюмень">Тюмень</option>
+                        </select>
+                        <form method="post" action="{% url 'ChangeCity' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="city" id="city" value="{{ city }}">
+                            <button type="submit" class="button" style="">
+                                Да, это мой город</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
