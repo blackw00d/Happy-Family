@@ -332,7 +332,7 @@ def create_order(phone, email, pay, city):
 
 
 def add_items_to_order(basket, created, city):
-    """ Внесение товаров в заказ и изменение количесва товаров на складе города покупки"""
+    """ Внесение товаров в заказ и уменьшение количества товаров на складе города покупки"""
     for item in basket:
         item_name = CityPrice.objects.get(item__name=item)
         OrderItem.objects.create(order=created, items=item_name)

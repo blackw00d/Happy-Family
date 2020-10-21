@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Happy Family</title>
     <meta name="description" content="элeктрoмoбили для дeтeй, шикарные элeктрoмoбили в Сургуте">
-	<meta name="keywords" content="дeтскиe, элeктрoмoбили, для, дeтeй, рeбeнкa. зaкaзaть, элeктромобиль, Сургут">
+    <meta name="keywords" content="дeтскиe, элeктрoмoбили, для, дeтeй, рeбeнкa. зaкaзaть, элeктромобиль, Сургут">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -23,17 +23,18 @@
 {% include 'HFhtml/header.html' %}
 
 <section class="main">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="main-title">
-					<h1>ШИКАРНЫЕ ЭЛЕКТРОМОБИЛИ</h1>
-					<p>У нас Вы сможете найти самый широкий выбор детских электромобилей отличного качества по самым низким ценам в городе.</p>
-				</div>
-			</div>
-			<div class="col-md-6"></div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="main-title">
+                    <h1>ШИКАРНЫЕ ЭЛЕКТРОМОБИЛИ</h1>
+                    <p>У нас Вы сможете найти самый широкий выбор детских электромобилей отличного качества по самым
+                        низким ценам в городе.</p>
+                </div>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
 </section>
 
 <section class="detmob" id="det1">
@@ -48,6 +49,9 @@
                             <img src="{{ image.image.url }}">
                         {% endfor %}
                     </div>
+                    {% if car.sale > 0 %}
+                        <div class="sale">- {{ car.sale }} %</div>
+                    {% endif %}
                     <div class="row header-data">
                         <div class="col-md-8"><strong class="name-data">{{ car.item.name }}</strong></div>
                         <div class="col-md-4"><span class="year-data">{{ car.item.age }}</span></div>
@@ -65,17 +69,20 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 text-center">
-                            <div class="cena">
-                                <span>{{ car.price }} &#x20BD;</span>
-                            </div>
-
-                        </div>
-                        <div class="col-md-6 text-center">
                             {% if car.sale > 0 %}
-                                <div class="cena-so-skidkoi text-center">
-                                    <span>СКИДКА<br>-{{ car.sale }}%</span>
+                                <div class="cena" style="color: #f91155">
+                                    {{ car.get_sale_price }} &#x20BD;
+                                </div>
+                                <div class="cena-so-skidkoi">
+                                    {{ car.price }} &#x20BD;
+                                </div>
+                            {% else %}
+                                <div class="cena">
+                                    {{ car.price }} &#x20BD;
                                 </div>
                             {% endif %}
+                        </div>
+                        <div class="col-md-6 text-center">
                             {% csrf_token %}
                             <a href="#" class="btn buy" data-name="{{ car.item.name }}" data-price="{{ car.price }}">Купить</a>
                         </div>

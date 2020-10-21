@@ -9,7 +9,7 @@ from HFhtml.models import OrderItem
 def check_vk(vk_id):
     """ Проверка подписки на группу в ВК """
     url = "https://api.vk.com/method/groups.getMembers?group_id=174429100&access_token" \
-          "=fc035b21fc035b21fc035b216dfc6b125fffc03fc035b21a04f00868e3eec3221de283a&v=5.92 "
+          "=fc035b21fc035b21fc035b216dfc6b125fffc03fc035b21a04f00868e3eec3221de283a&v=5.92"
     data = json.loads(requests.post(url).text)
     if data['response'] is not None and vk_id is not None:
         for item in data['response']['items']:

@@ -4796,6 +4796,17 @@ div.am-tooltip:after {
     font-size: 24px
 }
 
+.sale {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #f91155;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 0px 0px 20px 0px;
+    color: #ffffff
+}
+
 .text-right {
     text-align: right
 }

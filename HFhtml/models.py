@@ -129,6 +129,9 @@ class CityPrice(models.Model):
     def __str__(self):
         return self.item.name
 
+    def get_sale_price(self):
+        return self.price - (self.price * self.sale / 100)
+
     class Meta:
         verbose_name = 'Товар по городам'
         verbose_name_plural = 'Товары по городам'
@@ -226,7 +229,7 @@ class UsersAdmin(admin.ModelAdmin):
 
 @admin.register(Items)
 class ItemsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'age', 'tech', 'weight')  # , 'count', 'price', 'sale')
+    list_display = ('name', 'age', 'tech', 'weight')
     inlines = [ImagesinLine]
 
 
@@ -248,7 +251,7 @@ class CityAdmin(admin.ModelAdmin):
 
 @admin.register(CityPrice)
 class CityPriceAdmin(admin.ModelAdmin):
-    list_display = ('city', 'item', 'count', 'price', 'sale')
+    list_display = ('city', 'item', 'count', 'price', 'sale', 'get_sale_price')
 
 
 @admin.register(Orders)
