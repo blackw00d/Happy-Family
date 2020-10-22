@@ -212,7 +212,7 @@ psql -h localhost hf_db admin < dump.sql
 sudo vim /etc/nginx/sites-enabled
 default@
 ```
-##### Delete all and write:
+Delete all and write:
 ```bash
 server {
         listen 80 default_server;
@@ -243,12 +243,12 @@ server {
         }
 }
 ```
-##### Restart NGINX
+Restart NGINX
 ```bash
 sudo service nginx restart
 ```
 #### Options for static
-##### Don’t forget create folder static in root directory and then
+Don’t forget create folder static in root directory and then
 ```bash
 python manage.py collectstatic
 ```
