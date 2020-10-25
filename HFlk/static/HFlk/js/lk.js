@@ -8,37 +8,32 @@ $(document).ready(function () {
         this.className = 'active';
     });
     $("#settingsclick").click(function () {
-        let top = document.getElementById('controlpanel');
-        top.className = '';
-        top.style = 'display:none;'
-        top = document.getElementById('settings');
-        top.className = 'page-wrapper';
-        top.style = 'visibility: visible;position:absolute;top:70px;height:calc(100% - 70px);width:85%';
-        top = document.getElementById('orders');
-        top.className = '';
-        top.style = 'display:none';
+        $('#settings').addClass('page-wrapper').css({
+            'position': 'absolute',
+            'top': '70px',
+            'width': '85%',
+            'height': 'calc(100% - 70px)'
+        }).show();
+        $('#controlpanel').removeClass().hide();
+        $('#orders').removeClass().hide();
     });
     $("#panelclick").click(function () {
-        let top = document.getElementById('settings');
-        top.className = '';
-        top.style = 'display:none;position:absolute;top:70px;height:70%;';
-        top = document.getElementById('controlpanel');
-        top.className = 'page-wrapper';
-        top.style = 'visibility: visible;';
-        top = document.getElementById('orders');
-        top.className = '';
-        top.style = 'display:none;';
+        $('#settings').removeClass().hide().css({
+            'position': 'absolute',
+            'top': '70px',
+            'height': '70%'
+        });
+        $('#controlpanel').addClass('page-wrapper').show();
+        $('#orders').removeClass().hide();
     });
     $("#ordersclick").click(function () {
-        let top = document.getElementById('settings');
-        top.className = '';
-        top.style = 'display:none;position:absolute;top:70px;height:70%;';
-        top = document.getElementById('controlpanel');
-        top.className = '';
-        top.style = 'display:none;position:absolute;top:70px;height:70%;';
-        top = document.getElementById('orders');
-        top.className = 'page-wrapper';
-        top.style = 'visibility: visible;position:absolute;top:70px;width:85%;';
+        $('#settings').removeClass().hide();
+        $('#controlpanel').removeClass().hide();
+        $('#orders').addClass('page-wrapper').css({
+            'position': 'absolute',
+            'top': '70px',
+            'width': '85%'
+        }).show();
     });
 });
 
