@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                 <div class="col-6 col-md-8">
+                <div class="col-6 col-md-8">
                     <div class="card">
                         <div class="card-body">
                             <div>Вы пригласили <span style="color: #0069d9;">{{ ref }}</span> человек (а)
@@ -145,7 +145,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="dashcard-text-title text-muted">Ваша скидка</h6>
-                            <h2 class="dashcard-text-stat"{{ sale }}</h2>
+                            {{ sale }}
                         </div>
                     </div>
                 </div>
@@ -281,79 +281,61 @@
                     <div class="card" style="background-color: #f4f6f9">
                         <div class="card-body">
                             <div class="table-responsive">
-                                {% for order in orders %}
-                                    {% ifchanged order.order_id %}
-                                        {% if forloop.counter > 1 %}
+                                {% if orders %}
+                                    {% for order in orders %}
+                                        <div class="shopping-cart">
+                                            <div class="card-title">
+                                                <div class="card-order">
+                                                    Заказ №{{ order.id }}<br>от {{ order.created|date:'d.m.Y H:m' }}
+                                                </div>
+                                                <div><span style="font-weight: 500">{{ order.status }}</span></div>
+                                            </div>
+                                            <div class="column-labels">
+                                                <label class="product-image">Изображение</label>
+                                                <label class="product-details">Товар</label>
+                                                <label class="product-price" style="width: 23%">Цена</label>
+                                            </div>
+                                            {% for item in order.items.all %}
+                                                <div class="product">
+                                                    <div class="product-image">
+                                                        <img src="{{ item.items.item.image }}">
+                                                    </div>
+                                                    <div class="product-details">
+                                                        <div class="product-title">{{ item.items }}</div>
+                                                    </div>
+                                                    <div class="product-price"
+                                                         style="width: 23%">{{ item.items.get_sale_price }}</div>
+                                                </div>
+                                            {% endfor %}
                                             <div class="totals">
                                                 <div class="totals-item totals-item-total">
                                                     <label>Итого</label>
                                                     <div class="totals-value" id="cart-total"
-                                                         style="text-align: center"></div>
+                                                         style="text-align: center">
+                                                        {{ order.get_total_cost }} &#x20BD;
+                                                    </div>
                                                 </div>
                                             </div>
-                                            </div>
-                                        {% endif %}
-                                        <div class="shopping-cart">
-                                        <div class="card-title">
-                                            <div class="card-order">
-                                                Заказ
-                                                №{{ order.order_id }}<br>от {{ order.order.created|date:'d.m.Y H:m' }}
-                                            </div>
-                                            <div><span style="font-weight: 500">{{ order.order.status }}</span></div>
                                         </div>
-                                        <div class="column-labels">
-                                            <label class="product-image">Изображение</label>
-                                            <label class="product-details">Товар</label>
-                                            <label class="product-price" style="width: 23%">Цена</label>
-                                        </div>
-                                        <div class="product">
-                                            <div class="product-image">
-                                                <img src="{{ order.items.item.image }}">
-                                            </div>
-                                            <div class="product-details">
-                                                <div class="product-title">{{ order.items.item.name }}</div>
-                                            </div>
-                                            <div class="product-price" style="width: 23%">{{ order.items.price }}</div>
-                                        </div>
-                                    {% else %}
-                                        <div class="product">
-                                            <div class="product-image">
-                                                <img src="{{ order.items.item.image }}">
-                                            </div>
-                                            <div class="product-details">
-                                                <div class="product-title">{{ order.items.item.name }}</div>
-                                            </div>
-                                            <div class="product-price" style="width: 23%">{{ order.items.price }}</div>
-                                        </div>
-                                    {% endifchanged %}
-                                {% endfor %}
-                                {% if orders.count %}
-                                    <div class="totals">
-                                        <div class="totals-item totals-item-total">
-                                            <label>Итого</label>
-                                            <div class="totals-value" id="cart-total"
-                                                 style="text-align: center"></div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    </div>
+                                    {% endfor %}
                                 {% else %}
                                     <div class="card-title">
-                                    {% if phone == '' %}
-                                        У Вас не указан номер телефона.<br>
-                                        Для отслеживания заказов введите номер телефона в разделе<br>
-                                        Настройки
-                                    {% else %}
-                                        У Вас нет заказов
-                                    {% endif %}
+                                        {% if phone == '' %}
+                                            У Вас не указан номер телефона.<br>
+                                            Для отслеживания заказов введите номер телефона в разделе<br>
+                                            Настройки
+                                        {% else %}
+                                            У Вас нет заказов
+                                        {% endif %}
+                                    </div>
                                 {% endif %}
-                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>

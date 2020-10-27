@@ -262,7 +262,6 @@ class OrdersAdmin(admin.ModelAdmin):
         order_obj = Orders.objects.filter(id=order_number)
         orders = OrderItem.objects.filter(order_id=order_number).values('items__item__name', 'items__city__name')
         for order in orders:
-            print(order)
             CityPrice.objects.filter(city__name=order['items__city__name'],
                                      item__name=order['items__item__name']).values('count').update(count=F('count') + 1)
         order_obj.delete()

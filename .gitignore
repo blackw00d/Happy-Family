@@ -19,3 +19,4 @@ venv/
 .env.prod
 /media/items/img/
 .gitignore
+Debian Server Set Up for Django Instruction.docx

@@ -1,9 +1,8 @@
 from hashlib import md5
 import requests
 import json
-from HFhtml.models import Users
+from HFhtml.models import Users, Orders
 from django.utils.safestring import mark_safe
-from HFhtml.models import OrderItem
 
 
 def check_vk(vk_id):
@@ -31,9 +30,11 @@ def get_user_data(email):
     vk_id = user[0]['vk'] if user[0]['vk'] is not None else ''
     instagram = user[0]['inst'] if user[0]['inst'] is not None else ''
     phone = user[0]['phone'] if user[0]['phone'] is not None else ''
-    orders = OrderItem.objects.filter(order__email=user[0]['email']).order_by('order_id').all()
+    orders = Orders.objects.filter(email=user[0]['email']).order_by('id')
     sale = mark_safe(
-        " title='Скидка автивируется после проверки Instagram'>5%") if vk_status == 'Подписан' else mark_safe(">0%")
+        "<h2 class='dashcard-text-stat' title='Скидка автивируется после проверки Instagram'>5%</h2>") \
+        if vk_status == 'Подписан' \
+        else mark_safe("<h2 class='dashcard-text-stat'>0%</h2>")
 
     return {'name': name, 'ref_link': ref_link, 'ref': ref, 'vk': vk_id, 'vk_status': vk_status,
             'instagram': instagram, 'instagram_status': instagram_status, 'phone': phone, 'sale': sale,
