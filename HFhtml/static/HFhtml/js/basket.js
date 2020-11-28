@@ -31,7 +31,8 @@ function recalculateCart() {
     let total = 0;
 
     $('.product').each(function () {
-        total += parseFloat($(this).children('.product-price').text());
+        let i = parseFloat($(this).children('.product-price').text());
+        if (!isNaN(i)) total += parseFloat($(this).children('.product-price').text());
     });
 
     /* Update totals display */

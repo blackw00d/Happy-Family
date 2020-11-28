@@ -25,7 +25,6 @@
                     <a href="/"><img src="{% static 'HFhtml/img/logo.png' %}" alt="Happy Family">
                         <ul>
                             <li>Happy Family</li>
-                            <li>Surgut</li>
                         </ul>
                     </a>
                 </div>
@@ -33,7 +32,6 @@
         </div>
     </div>
 </section>
-
 {% if success %}
     <div class="shopping-cart">
         <h1>Ваш {{ order }} создан!</h1>
@@ -48,7 +46,6 @@
                 <h0>Корзина ждет, что ее наполнят. Желаем приятных покупок!</h0>
             {% else %}
                 <h1>Ваш Заказ</h1>
-
                 {% csrf_token %}
                 <div class="column-labels">
                     <label class="product-image">Изображение</label>
@@ -56,17 +53,21 @@
                     <label class="product-price">Цена</label>
                     <label class="product-removal">Remove</label>
                 </div>
-                {% for i, n in basket.items %}
+                {% for k, v in basket.items %}
                     <div class="product">
                         <div class="product-image">
-                            <img src="../media/{{ n.img }}">
+                            <img src="../media/{{ v.img }}">
                         </div>
                         <div class="product-details">
-                            <div class="product-title">{{ i }}</div>
+                            <div class="product-title">{{ k }}</div>
                         </div>
-                        <div class="product-price">{{ n.price }} &#x20BD;</div>
+                        {% if v.sold %}
+                            <div class="product-price">Товара<br> нет в наличии</div>
+                        {% else %}
+                            <div class="product-price">{{ v.price }} &#x20BD;</div>
+                        {% endif %}
                         <div class="product-removal">
-                            <a href="#" class="remove-product" data-name="{{ i }}">
+                            <a href="#" class="remove-product" data-name="{{ k }}">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </div>
@@ -111,31 +112,7 @@
     </form>
 {% endif %}
 
-<section class="footer" id="footer">
-    <div class="container">
-
-        <div id="fa" class="top-phone">
-            <a href="https://instagram.com/happyfamily_hmao" title="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://vk.com/happyfamily_hmao" title="VKontakte">
-                <i class="fab fa-vk"></i>
-            </a>
-        </div>
-        <div id="tel">
-            <div class="top-phone">
-                <a href="tel:+79226503403" title="Viber" class="a1">8 922 650-34-03</a>
-            </div>
-        </div>
-        <div id="lk">
-            <a href="/lk/" title="Войти" class="btn1 "><i class="fas fa-sign-in-alt"></i> Личный
-                кабинет</a>
-        </div>
-        <div class="copy">
-            Copyright©2019 Blackw00d ArtStudio
-        </div>
-    </div>
-</section>
+{% include 'HFhtml/footer.html' %}
 
 </body>
 </html>

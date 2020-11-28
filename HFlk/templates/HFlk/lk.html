@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" href="{% static 'HFlk/img/logo.png' %}">
-    <title>Личный кабинет | Happy Family Surgut</title>
+    <title>Личный кабинет | Happy Family</title>
     <link rel="stylesheet" href="{% static 'HFlk/css/checkout.css' %}">
     <link rel="stylesheet" href="{% static 'HFlk/css/lk_style.css' %}">
 
@@ -25,7 +25,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">
                     <span>
-                        <img src="{% static 'HFlk/img/logo.png' %}" height="55" title="Happy Family Surgut"
+                        <img src="{% static 'HFlk/img/logo.png' %}" height="55" title="Happy Family"
                              class="dark-logo">
                     </span>
                 </a>
@@ -34,7 +34,7 @@
                 <ul class="navbar-nav my-lg-0">
                     <li class="nav-item d-none d-sm-flex">
                         <a class="link text-themecolor" href="/">
-                            Happy Family Surgut
+                            Happy Family
                         </a>
                     </li>
                 </ul>
@@ -304,7 +304,7 @@
                                                         <div class="product-title">{{ item.items }}</div>
                                                     </div>
                                                     <div class="product-price"
-                                                         style="width: 23%">{{ item.items.get_sale_price }}</div>
+                                                         style="width: 23%">{{ item.order_price }}</div>
                                                 </div>
                                             {% endfor %}
                                             <div class="totals">

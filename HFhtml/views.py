@@ -6,14 +6,14 @@ from .services import *
 
 
 class AddCall(View):
-    """ Форма обратной связи, добавление информации о пользователе """
+    """ Форма обратной связи, добавление информации о пользователе в базу данных,
+        отправка сообщения в группу Telegram """
 
     def post(self, request):
         form = CallForm(request.POST)
         if form.is_valid():
             form.save()
-        else:
-            print(form.errors)
+            telegram_add_call(request.POST.get('phone', None))
         return redirect('/')
 
 
@@ -56,7 +56,7 @@ def make_order(request):
     created = create_order(phone, email, pay, city)
     if created and email:
         send_email(email, created, pay)
-
+    telegram_make_order(phone, created, city)
     add_items_to_order(basket, created, city)
     request.session.modified = True
 
@@ -68,7 +68,8 @@ def checkout(request):
     if 'basket' not in request.session:
         return index(request)
 
-    return render(request, 'HFhtml/checkout.html', get_basket_with_len(request.session['basket']))
+    return render(request, 'HFhtml/checkout.html',
+                  get_basket_with_len(request.session['basket'], request.session['city']))
 
 
 def change_city(request):
@@ -90,6 +91,6 @@ def index(request):
     itemlist = get_all_items(request.session['city'])
     cities = get_all_cities()
     context = {'items': itemlist, 'cities': cities, 'city': request.session['city']}
-    context.update(get_basket_with_len(request.session['basket']))
+    context.update(get_basket_with_len(request.session['basket'], request.session['city']))
 
     return render(request, 'HFhtml/index.html', context)

@@ -3,6 +3,8 @@ from HappyFamily.settings import EMAIL_HOST_USER
 from .models import Items, Images, Orders, OrderItem, CityPrice, City
 from django.core.mail import send_mail
 from django.db.models import F
+from .telegram_api import Telegram
+import os
 
 
 def send_email(email, created, pay_method):
@@ -320,9 +322,17 @@ def add_item_to_basket(basket, name, price, image_url):
     return data
 
 
-def get_basket_with_len(basket):
+def get_basket_with_len(basket, city):
     """ Полученеи корзины и количества товаров в ней """
+    for item in basket:
+        exists = CityPrice.objects.filter(item__name=item, city__name=city, count__gt=0).exists()
+        price = CityPrice.objects.filter(item__name=item, city__name=city)[0].get_sale_price()
+        if exists:
+            basket[item] = {'price': price, 'img': get_item_image(item), 'sold': False}
+        else:
+            basket[item] = {'price': price, 'img': get_item_image(item), 'sold': True}
     basket_len = len(basket.values())
+    print(basket, basket_len)
     return {'basket': basket, 'basket_len': basket_len}
 
 
@@ -334,7 +344,25 @@ def create_order(phone, email, pay, city):
 def add_items_to_order(basket, created, city):
     """ Внесение товаров в заказ и уменьшение количества товаров на складе города покупки"""
     for item in basket:
-        item_name = CityPrice.objects.get(item__name=item)
-        OrderItem.objects.create(order=created, items=item_name)
-        CityPrice.objects.filter(city__name=city, item__name=item).values('count').update(count=F('count') - 1)
+        exists = CityPrice.objects.filter(item__name=item, city__name=city, count__gt=0).exists()
+        price = CityPrice.objects.filter(item__name=item, city__name=city)[0].get_sale_price()
+        if exists:
+            item_name = CityPrice.objects.get(item__name=item)
+            OrderItem.objects.create(order=created, items=item_name, order_price=price)
+            CityPrice.objects.filter(city__name=city, item__name=item).values('count', 'reserved').update(
+                count=F('count') - 1, reserved=F('reserved') + 1)
     basket.clear()
+
+
+def telegram_add_call(phone):
+    """ Отправка сообщения в группу Telegram от формы обратной связи """
+    telegram = Telegram(os.environ.get('TELEGRAM_TOKEN', ''))
+    telegram.send_message_to_user(os.environ.get('TELEGRAM_ADMIN', ''),
+                                  f'Клиент с номером {phone} заказал обратный звонок')
+
+
+def telegram_make_order(phone, order, city):
+    """ Отправка сообщения в группу Telegram о совершении заказа """
+    telegram = Telegram(os.environ.get('TELEGRAM_TOKEN', ''))
+    telegram.send_message_to_user(os.environ.get('TELEGRAM_ADMIN', ''),
+                                  f'Клиент с номером {phone} сделал {order} в г.{city}')

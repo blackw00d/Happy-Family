@@ -43,17 +43,21 @@
                 <label class="product-price">Цена</label>
                 <label class="product-removal">Remove</label>
             </div>
-            {% for i, n in basket.items %}
+            {% for k, v in basket.items %}
                 <div class="product">
                     <div class="product-image">
-                        <img src="media/{{ n.img }}">
+                        <img src="media/{{ v.img }}">
                     </div>
                     <div class="product-details">
-                        <div class="product-title">{{ i }}</div>
+                        <div class="product-title">{{ k }}</div>
                     </div>
-                    <div class="product-price">{{ n.price }} &#x20BD;</div>
+                    {% if v.sold %}
+                        <div class="product-price">Товара<br> нет в наличии</div>
+                    {% else %}
+                        <div class="product-price">{{ v.price }} &#x20BD;</div>
+                    {% endif %}
                     <div class="product-removal">
-                        <a href="#" class="remove-product" data-name="{{ i }}">
+                        <a href="#" class="remove-product" data-name="{{ k }}">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>

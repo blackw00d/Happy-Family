@@ -123,7 +123,8 @@ class CityPrice(models.Model):
     city = models.ForeignKey(City, related_name='town', on_delete=models.CASCADE, verbose_name='Город заказа')
     item = models.ForeignKey(Items, related_name='city_items', on_delete=models.CASCADE, verbose_name='Товар')
     count = models.IntegerField('Количество', default=0)
-    price = models.FloatField('Цена', default=0)
+    reserved = models.IntegerField('Зарезервировано', default=0)
+    price = models.FloatField('Цена без скидки', default=0)
     sale = models.IntegerField('Скидка', default=0)
 
     def __str__(self):
@@ -131,6 +132,8 @@ class CityPrice(models.Model):
 
     def get_sale_price(self):
         return self.price - (self.price * self.sale / 100)
+
+    get_sale_price.short_description = "Финальная цена"
 
     class Meta:
         verbose_name = 'Товар по городам'
@@ -158,7 +161,7 @@ class Orders(models.Model):
         return 'Заказ №{}'.format(self.id)
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        return sum(item.order_price for item in self.items.all())
 
     get_total_cost.short_description = 'Сумма Заказа'
 
@@ -167,6 +170,7 @@ class OrderItem(models.Model):
     """ Товары в заказе """
     order = models.ForeignKey(Orders, related_name='items', on_delete=models.CASCADE, verbose_name='Номер заказа')
     items = models.ForeignKey(CityPrice, related_name='order_items', on_delete=models.CASCADE, verbose_name='Товар')
+    order_price = models.FloatField('Цена при заказе', default=0)
 
     def __str__(self):
         return '{}'.format(self.id)
@@ -181,7 +185,7 @@ class OrderItem(models.Model):
     image.short_description = 'Изображение'
 
     def get_cost(self):
-        return self.items.price
+        return self.items.get_sale_price()
 
     get_cost.short_description = 'Цена'
 
@@ -219,7 +223,7 @@ class OrderItemInline(admin.TabularInline):
     """ Отображение содердимого заказа """
     model = OrderItem
     extra = 1
-    readonly_fields = ("image", "get_cost",)
+    readonly_fields = ("image", "order_price",)
 
 
 @admin.register(Users)
@@ -251,19 +255,20 @@ class CityAdmin(admin.ModelAdmin):
 
 @admin.register(CityPrice)
 class CityPriceAdmin(admin.ModelAdmin):
-    list_display = ('city', 'item', 'count', 'price', 'sale', 'get_sale_price')
+    list_display = ('city', 'item', 'count', 'reserved', 'price', 'sale', 'get_sale_price')
 
 
 @admin.register(Orders)
 class OrdersAdmin(admin.ModelAdmin):
 
     def cancel_order(self, request, queryset):
-        order_number = int(str(queryset[0])[str(queryset[0]).index('№')+1:])
+        order_number = int(str(queryset[0])[str(queryset[0]).index('№') + 1:])
         order_obj = Orders.objects.filter(id=order_number)
         orders = OrderItem.objects.filter(order_id=order_number).values('items__item__name', 'items__city__name')
         for order in orders:
             CityPrice.objects.filter(city__name=order['items__city__name'],
-                                     item__name=order['items__item__name']).values('count').update(count=F('count') + 1)
+                                     item__name=order['items__item__name']).values('count', 'reserved').update(
+                count=F('count') + 1, reserved=F('reserved') - 1)
         order_obj.delete()
 
     cancel_order.short_description = "Отменить заказ"
@@ -276,7 +281,7 @@ class OrdersAdmin(admin.ModelAdmin):
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('order', 'items', 'get_cost')
+    list_display = ('order', 'items', 'order_price')
 
 
 @admin.register(Call)
