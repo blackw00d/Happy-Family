@@ -1,11 +1,4 @@
-.idea/.gitignore
-.idea/HappyFamily.iml
-.idea/dataSources.xml
-.idea/dictionaries/
-.idea/inspectionProfiles/
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
+.idea
 HFadmin/__pycache__/
 HFadmin/migrations/__pycache__/
 HFhtml/__pycache__/
