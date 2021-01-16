@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '1111')
 DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1').split(' ')
-
 
 # Application definition
 
@@ -73,7 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'HappyFamily.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -108,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -122,7 +118,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -131,10 +126,22 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
 # SMTP Settings
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'user')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'password')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', '587')
 EMAIL_USE_TLS = bool(int(os.environ.get('EMAIL_USE_TLS', default=1)))
+
+# TELEGRAM_SETTINGS
+TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN', '')
+TELEGRAM_ADMIN = os.environ.get('TELEGRAM_ADMIN', '')
+
+# VK_SETTINGS
+VK_GROUP_ID = os.environ.get('VK_GROUP_ID', '')
+VK_ACCESS_TOKEN = os.environ.get('VK_ACCESS_TOKEN', '')
+
+# INSTAGRAM_SETTINGS
+INSTAGRAM_GROUP_ID = os.environ.get('INSTAGRAM_GROUP_ID', '')
+INSTAGRAM_LOGIN = os.environ.get('INSTAGRAM_LOGIN', '')
+INSTAGRAM_PASSWORD = os.environ.get('INSTAGRAM_PASSWORD', '')

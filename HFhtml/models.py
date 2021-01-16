@@ -1,4 +1,7 @@
-from hashlib import md5
+# from HappyFamily.settings import VK_GROUP_ID, VK_ACCESS_TOKEN, INSTAGRAM_GROUP_ID, INSTAGRAM_LOGIN, INSTAGRAM_PASSWORD
+# import json
+# import requests
+# from instagrapi import Client
 
 from django.db import models
 from django.contrib import admin
@@ -7,6 +10,9 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.base_user import BaseUserManager
+from hashlib import md5
+
+from .social_services import check_vk_subscribe, check_instagram_subscribe
 
 
 class UsersManager(BaseUserManager):
@@ -55,13 +61,33 @@ class Users(AbstractBaseUser, PermissionsMixin):
     reset = models.TextField('Ссылка восстановления', default=None)
     ref = models.IntegerField('Referral', default=0)
     vk = models.TextField('ВКонтакте ID', default=None, null=True)
+    vk_status = models.TextField('ВКонтакте', choices=[('Подписан', 'Подписан'), ('Не подписан', 'Не подписан')],
+                                 default='Не подписан')
     inst = models.TextField('Instagram ID', default=None, null=True)
+    inst_status = models.TextField('Instagram', choices=[('Подписан', 'Подписан'), ('Не подписан', 'Не подписан')],
+                                   default='Не подписан')
     is_staff = models.BooleanField('is_staff', default=False)
 
     objects = UsersManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    def check_vk(self, vk_id):
+        """ Проверка подписки на группу в ВК """
+        if vk_id is None:
+            return self.vk_status
+
+        self.vk_status = check_vk_subscribe(vk_id)
+        self.save()
+
+    def check_instagram(self, instagram_id):
+        """ Проверка подписки в Instagram """
+        if instagram_id is None:
+            return self.inst_status
+
+        self.inst_status = check_instagram_subscribe(instagram_id)
+        self.save()
 
     class Meta:
         verbose_name = 'Пользователь'
@@ -144,7 +170,8 @@ class Orders(models.Model):
     """ Заказы """
     phone = models.TextField('Телефон', default=None)
     email = models.EmailField('E-mail', default=None)
-    pay = models.TextField('Оплата', choices=[('online', 'Онлайн'), ('offline', 'При получении')], default='Онлайн')
+    pay = models.TextField('Оплата', choices=[('Онлайн', 'Онлайн'), ('При получении', 'При получении')],
+                           default='Онлайн')
     city = models.CharField('Город', max_length=200, default=None)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -228,7 +255,7 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
-    list_display = ('email', 'password', 'reset', 'ref', 'vk', 'inst', 'is_staff')
+    list_display = ('email', 'password', 'reset', 'ref', 'vk', 'vk_status', 'inst', 'inst_status', 'is_staff')
 
 
 @admin.register(Items)

@@ -1,6 +1,6 @@
 {% load static %}
 
-<html>
+<html lang="RU">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,7 +26,7 @@
                 <a class="navbar-brand" href="/">
                     <span>
                         <img src="{% static 'HFlk/img/logo.png' %}" height="55" title="Happy Family"
-                             class="dark-logo">
+                             class="dark-logo" alt="Happy Family">
                     </span>
                 </a>
             </div>
@@ -253,7 +253,9 @@
                                                 <h4 class="dashcard-text-stat">
                                                     <button type="submit" id="sumbitForminst" class="link"
                                                             data-toggle="tooltip"
-                                                            title="" data-original-title="Обновить">
+                                                            title="Проверка подписки длится около 1 мин.
+                                                            Пожалуйста дождитесь окончания загрузки"
+                                                            data-original-title="Обновить">
                                                         Обновить
                                                     </button>
                                                 </h4>
@@ -298,7 +300,7 @@
                                             {% for item in order.items.all %}
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <img src="{{ item.items.item.image }}">
+                                                        <img src="{{ item.items.item.image }}" alt="{{ item.items }}">
                                                     </div>
                                                     <div class="product-details">
                                                         <div class="product-title">{{ item.items }}</div>

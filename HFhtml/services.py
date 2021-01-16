@@ -1,10 +1,9 @@
 from django.utils.safestring import mark_safe
-from HappyFamily.settings import EMAIL_HOST_USER
+from HappyFamily.settings import EMAIL_HOST_USER, TELEGRAM_TOKEN, TELEGRAM_ADMIN
 from .models import Items, Images, Orders, OrderItem, CityPrice, City
 from django.core.mail import send_mail
 from django.db.models import F
 from .telegram_api import Telegram
-import os
 
 
 def send_email(email, created, pay_method):
@@ -332,7 +331,6 @@ def get_basket_with_len(basket, city):
         else:
             basket[item] = {'price': price, 'img': get_item_image(item), 'sold': True}
     basket_len = len(basket.values())
-    print(basket, basket_len)
     return {'basket': basket, 'basket_len': basket_len}
 
 
@@ -356,13 +354,11 @@ def add_items_to_order(basket, created, city):
 
 def telegram_add_call(phone):
     """ Отправка сообщения в группу Telegram от формы обратной связи """
-    telegram = Telegram(os.environ.get('TELEGRAM_TOKEN', ''))
-    telegram.send_message_to_user(os.environ.get('TELEGRAM_ADMIN', ''),
-                                  f'Клиент с номером {phone} заказал обратный звонок')
+    telegram = Telegram(TELEGRAM_TOKEN)
+    telegram.send_message_to_user(TELEGRAM_ADMIN, f'Клиент с номером {phone} заказал обратный звонок')
 
 
 def telegram_make_order(phone, order, city):
     """ Отправка сообщения в группу Telegram о совершении заказа """
-    telegram = Telegram(os.environ.get('TELEGRAM_TOKEN', ''))
-    telegram.send_message_to_user(os.environ.get('TELEGRAM_ADMIN', ''),
-                                  f'Клиент с номером {phone} сделал {order} в г.{city}')
+    telegram = Telegram(TELEGRAM_TOKEN)
+    telegram.send_message_to_user(TELEGRAM_ADMIN, f'Клиент с номером {phone} сделал {order} в г.{city}')
