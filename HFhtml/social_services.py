@@ -29,10 +29,9 @@ def check_instagram_subscribe(instagram_id):
     if instagram_id is None:
         return 'Не подписан'
 
-    instagram_group_id = INSTAGRAM_GROUP_ID
     cl = Client()
     cl.login(INSTAGRAM_LOGIN, INSTAGRAM_PASSWORD)
     user = cl.user_id_from_username(instagram_id)
-    user_followers = cl.user_followers(instagram_group_id).keys()
+    user_followers = cl.user_followers(INSTAGRAM_GROUP_ID).keys()
 
     return 'Подписан' if user in user_followers else 'Не подписан'
